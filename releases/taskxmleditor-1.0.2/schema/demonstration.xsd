@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="demonstrational_xsd"
+           xmlns:tns="demonstrational_xsd" elementFormDefault="qualified">
+  <xs:element name="root">
+       <xs:annotation><xs:documentation>This is Root speaking</xs:documentation></xs:annotation>
+        <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="string_element" type="xs:string">
+                    <xs:annotation><xs:documentation>An element with type=string</xs:documentation></xs:annotation>
+                  </xs:element>
+                  <xs:element name="complex_node" minOccurs="0">
+                    <xs:annotation><xs:documentation>Element with children, which have children of their own</xs:documentation></xs:annotation>
+                        <xs:complexType>
+                          <xs:sequence>
+                            <xs:element name="child" minOccurs="3" maxOccurs="5">
+                              <xs:complexType>
+                                <xs:sequence>
+                                  <xs:element name="leaf" minOccurs="1" type="xs:string" />
+                                </xs:sequence>
+                              </xs:complexType>
+                            </xs:element>
+                          </xs:sequence>
+                          <xs:attribute name="id" type="xs:string" use="required"/>
+                        </xs:complexType>
+                  </xs:element>
+                    <xs:element name="string_element_with_attr" type="tns:string_element_with_attr_type"/>
+                    <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
+                </xs:sequence>
+                <xs:attribute name="required_attribute" type="xs:string" use="required">
+                    <xs:annotation><xs:documentation>Required attribute</xs:documentation></xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="boolean_attribute" type="xs:boolean" use="optional" default="true"/>
+                <xs:attribute name="optional_attribute" type="xs:string" use="optional">
+                    <xs:annotation><xs:documentation>Optional attribute</xs:documentation></xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="enumeration_attribute" use="optional" default="Orange">
+                    <xs:annotation><xs:documentation>Enumeration: Apple, Orange, Banana</xs:documentation></xs:annotation>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Apple"/>
+                                <xs:enumeration value="Orange"/>
+                                <xs:enumeration value="Banana"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                </xs:attribute>
+                <xs:attributeGroup ref="tns:attribute_group"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="string_element_with_attr_type">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="xs:string" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:attributeGroup name="attribute_group">
+      <xs:attribute name="attribute_from_attribute_group" type="xs:string" use="optional">
+         <xs:annotation><xs:documentation>Attribute groups can get annotated too.</xs:documentation></xs:annotation>
+      </xs:attribute>
+    </xs:attributeGroup>
+</xs:schema>

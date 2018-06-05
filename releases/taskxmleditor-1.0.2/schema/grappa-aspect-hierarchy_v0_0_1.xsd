@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Wird zu jedem Task in Meta-Data hinzugefügt. Die Felder müssen manuell 
+	der hierarchischen Struktur von Grappa entsprechen und verweisen auf die 
+	TestId -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:grp="urn:grappa:tests:hierarchical:v0.0.1" targetNamespace="urn:grappa:tests:hierarchical:v0.0.1"
+           elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+  <!-- Root Elements -->
+  <xs:element name="accepted-rd-kinds" type="grp:rdkind-list-type">
+    <xs:annotation>
+      <xs:documentation>Specify the kind of document type a grader should return after finishing a grading process.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="test-group" type="grp:test-group-type">
+    <xs:annotation>
+      <xs:documentation>Specify maximum scores for tests.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="computing-resources" type="grp:computing-resources-type">
+    <xs:annotation>
+      <xs:documentation>Define computing resources for grading processes.</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="overall-test-configuration" type="grp:overall-testconf-type">
+    <xs:annotation>
+      <xs:documentation>TODO</xs:documentation>
+    </xs:annotation>
+    <xs:unique name="testids">
+      <xs:selector xpath=".//grp:file-role"/>
+      <xs:field xpath="@file-id"/>
+    </xs:unique>
+
+  </xs:element>
+
+
+  <!-- Type declaration -->
+  <xs:complexType name="overall-testconf-type">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="file-roles" minOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="file-role" minOccurs="1" maxOccurs="unbounded">
+              <xs:complexType>
+                <xs:attribute name="file-id" type="xs:string" use="required"/>
+                <xs:attribute name="role" type="xs:string" use="required"/>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="estimated-grading-seconds" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="test-group-type">
+    <xs:sequence>
+      <xs:element name="test-group-members" type="grp:test-group-members-type">
+        <xs:annotation>
+          <xs:documentation>test-group-members annotation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attributeGroup ref="grp:test-element-attr-type"/>
+  </xs:complexType>
+
+  <xs:complexType name="test-group-members-type">
+    <xs:sequence>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="test-element" type="grp:test-element-type">
+          <xs:annotation>
+            <xs:documentation>test-element annotation</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="test-group" type="grp:test-group-type"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="test-element-type">
+    <xs:attributeGroup ref="grp:test-element-attr-type"/>
+  </xs:complexType>
+
+
+  <xs:complexType name="rdkind-list-type">
+    <xs:sequence>
+      <xs:element name="kind" type="grp:rdkind-type" minOccurs="0"
+                  maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>HTML, Plain Text, ...</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="repr-type">
+    <xs:all/>
+  </xs:complexType>
+
+  <xs:complexType name="repr-html-type">
+    <xs:complexContent>
+      <xs:extension base="grp:repr-type">
+        <xs:all/>
+        <xs:attribute name="is-fragment" type="xs:boolean" use="required">
+          <xs:annotation>
+            <xs:documentation>It's either a complete HTML document or just a part of it.</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="repr-plain-text-type">
+    <xs:complexContent>
+      <xs:extension base="grp:repr-type">
+        <xs:all/>
+        <xs:attribute name="charset" type="xs:string">
+          <xs:annotation>
+            <xs:documentation>charset annotation</xs:documentation>
+          </xs:annotation>
+        </xs:attribute>
+        <xs:attribute name="format-as-ws-pre" type="xs:boolean"
+                      use="required">
+        </xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="repr-pdf-type">
+    <xs:complexContent>
+      <xs:extension base="grp:repr-type">
+        <xs:all/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="rdkind-type">
+    <xs:sequence>
+      <xs:choice minOccurs="0">
+        <xs:element name="html" type="grp:repr-html-type">
+          <xs:annotation>
+            <xs:documentation>A HTML result document</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="pdf" type="grp:repr-pdf-type"/>
+        <xs:element name="plaintext" type="grp:repr-plain-text-type"/>
+        <xs:element name="none" type="grp:repr-type"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="level" type="xs:string">
+      <xs:annotation>
+        <xs:documentation>level: student or teacher</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="audience" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="computing-resources-type">
+    <xs:all>
+      <xs:element name="max-runtime-seconds-wallclock-time"
+                  type="xs:int" nillable="true"/>
+      <xs:element name="max-disc-quota-kib" type="xs:int"
+                  nillable="true"/>
+      <xs:element name="max-mem-mib" type="xs:int" nillable="true"/>
+    </xs:all>
+  </xs:complexType>
+
+  <!-- Attribute declaration -->
+  <xs:attributeGroup name="test-element-attr-type">
+    <xs:attribute name="testref-id" type="xs:string" use="required"/>
+    <xs:attribute name="score-max" type="xs:double" use="optional"/>
+  </xs:attributeGroup>
+</xs:schema>

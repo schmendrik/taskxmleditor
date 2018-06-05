@@ -1,0 +1,16 @@
+Graja and the sample assignments have been brought to you by
+
+Robert Garmann
+Fakultät IV - Abteilung Informatik
+Hochschule Hannover
+Ricklinger Stadtweg 120
+D-30459 Hannover
+Germany
+
+robert.garmann@hs-hannover.de
+
+
+
+This file mainly serves the purpose to demonstrate, how to include the same resources in every
+assignment.
+

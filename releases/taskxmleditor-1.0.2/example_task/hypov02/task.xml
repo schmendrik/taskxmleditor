@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<task xmlns="urn:proforma:task:v1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" uuid="688e5df3-c360-4a15-b75d-05fd15543252" lang="en" xsi:schemaLocation="urn:proforma:task:v1.1 taskxml_v1_1.xsd urn:grappa:tests:hierarchical:v0.0.1 grappa-aspect-hierarchy_v0_0_1.xsd urn:proforma:tests:unittest:v1 proforma-unittest_v1.xsd http://graja.inform.hs-hannover.de/grade/v0.10.1 graja_v0_10_1.xsd">
+    <description>
+     &lt;p&gt;This is an automatically graded Graja assignment.
+        General instructions are in GeneralInstructions.pdf.
+        If you have any questions regarding this assignment please contact robert.garmann@hs-hannover.de.&lt;/p&gt;
+
+&lt;p&gt;Assignment specific instructions are in the attached file Instructions.pdf.&lt;/p&gt;
+</description>
+    <proglang version="7">java</proglang>
+    <submission-restrictions>
+        <regexp-restriction max-size="10000">^.*\.zip$</regexp-restriction>
+    </submission-restrictions>
+    <files>
+        <file id="dummy-model-solution" class="internal"></file>
+        <file id="id012" filename="ruleset_efficiency.xml" class="internal" type="file">attachment/ruleset_efficiency.xml</file>
+        <file id="id011" filename="ruleset_security.xml" class="internal" type="file">attachment/ruleset_security.xml</file>
+        <file id="id010" filename="ruleset_other.xml" class="internal" type="file">attachment/ruleset_other.xml</file>
+        <file id="id009" filename="ruleset_pr2.xml" class="internal" type="file">attachment/ruleset_pr2.xml</file>
+        <file id="id008" filename="ruleset_pr1.xml" class="internal" type="file">attachment/ruleset_pr1.xml</file>
+        <file id="id007" filename="Square.java" class="library" type="file">attachment/Square.java</file>
+        <file id="id006" filename="GradingHints.pdf" class="internal" type="file">attachment/GradingHints.pdf</file>
+        <file id="id005" filename="Instructions.pdf" class="instruction" type="file">attachment/Instructions.pdf</file>
+        <file id="id004" filename="MockitoWrap.jar" class="internal" type="file">attachment/MockitoWrap.jar</file>
+        <file id="id003" filename="GeneralInstructions.pdf" class="instruction" type="file">attachment/GeneralInstructions.pdf</file>
+        <file id="id002" filename="author.txt" class="internal" type="file">attachment/author.txt</file>
+        <file id="id001" filename="policy" class="internal">
+# source: D:\ws\git_Graja\development\SampleGrajaAssignments/build/dist/org.myinstitution.myassignments.hypotenusev02/modified.descriptor.default.xml
+// Here we specify permissions that will be granted to any grader and to any submission.
+// More specific and more permissive grants should be included in the assignment descriptor.xml.
+grantgrader {
+    // Grader reads fields from student's solution
+    // This is usually needed by any Grader, so we include it in the default descriptor.
+    permission java.lang.RuntimePermission &quot;accessDeclaredMembers&quot;;
+};
+grantsubmission {
+    // none
+};
+
+# source: D:\ws\git_Graja\development\SampleGrajaAssignments/build/dist/org.myinstitution.myassignments.hypotenusev02/modified.descriptor.xml
+// If there are grants specific to this assignment, put them here.
+grantgrader {
+    // Mockito:
+    permission java.util.PropertyPermission &quot;*&quot;, &quot;read&quot;;
+    permission java.lang.RuntimePermission &quot;accessDeclaredMembers&quot;;
+    permission java.lang.RuntimePermission &quot;getProtectionDomain&quot;;
+    permission java.lang.reflect.ReflectPermission &quot;suppressAccessChecks&quot;;
+    permission java.lang.RuntimePermission &quot;accessClassInPackage.sun.reflect&quot;;
+    permission java.lang.RuntimePermission &quot;reflectionFactoryAccess&quot;;
+    //permission java.lang.RuntimePermission &quot;createClassLoader&quot;;
+};
+grantsubmission {
+    // none
+};
+</file>
+        <file id="id000" filename="Grader.jar" class="internal" type="file">attachment/Grader.jar</file>
+    </files>
+    <external-resources/>
+    <model-solutions>
+        <model-solution id="dummy">
+            <filerefs>
+                <fileref refid="dummy-model-solution"/>
+            </filerefs>
+        </model-solution>
+    </model-solutions>
+    <tests>
+        <test id="graja-main-test">
+            <title>Graja results</title>
+            <test-type>grappa-test-group</test-type>
+            <test-configuration>
+                <filerefs>
+                    <fileref refid="id000"/>
+                    <fileref refid="id001"/>
+                    <fileref refid="id002"/>
+                    <fileref refid="id003"/>
+                    <fileref refid="id004"/>
+                    <fileref refid="id005"/>
+                    <fileref refid="id006"/>
+                    <fileref refid="id007"/>
+                    <fileref refid="id008"/>
+                    <fileref refid="id009"/>
+                    <fileref refid="id010"/>
+                    <fileref refid="id011"/>
+                    <fileref refid="id012"/>
+                </filerefs>
+                <externalresourcerefs/>
+                <computing-resources:computing-resources xmlns:computing-resources="urn:grappa:tests:hierarchical:v0.0.1" xmlns="urn:grappa:tests:hierarchical:v0.0.1">
+                    <max-runtime-seconds-wallclock-time>20</max-runtime-seconds-wallclock-time>
+                    <max-disc-quota-kib>500</max-disc-quota-kib>
+                    <max-mem-mib>64</max-mem-mib>
+                </computing-resources:computing-resources>
+                <graja:policyRef xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:ref externalOrFile="file" refid="id001"/>
+                </graja:policyRef>
+                <graja:classpathRefs xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:refs>
+                        <graja:refs externalOrFile="file" refid="id000"/>
+                        <graja:refs externalOrFile="file" refid="id011"/>
+                        <graja:refs externalOrFile="file" refid="id010"/>
+                        <graja:refs externalOrFile="file" refid="id012"/>
+                        <graja:refs externalOrFile="file" refid="id008"/>
+                        <graja:refs externalOrFile="file" refid="id009"/>
+                        <graja:refs externalOrFile="file" refid="id004"/>
+                    </graja:refs>
+                </graja:classpathRefs>
+                <test-meta-data>
+                    <graja:grajaMetaData xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                        <graja:grajaVersionCompatibility>1.5.0</graja:grajaVersionCompatibility>
+                    </graja:grajaMetaData>
+                </test-meta-data>
+            </test-configuration>
+        </test>
+        <test id="category_0">
+            <title>Functional correctness</title>
+            <test-type>graja-category</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+            </test-configuration>
+        </test>
+        <test id="junit_0">
+            <title>JUnit dynamic analysis</title>
+            <test-type>graja-junit</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:graderClassFqn>org.myinstitution.myassignments.hypotenusev02.grader.Grader</graja:graderClassFqn>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="method_0">
+            <title>Square should calculate correct results</title>
+            <test-type>graja-junit-method</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:methodName>org.myinstitution.myassignments.hypotenusev02.grader.SquareGrader#squareShouldCalculateCorrectResults</graja:methodName>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="method_1">
+            <title>Should calculate correct hypotenuse</title>
+            <test-type>graja-junit-method</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:methodName>org.myinstitution.myassignments.hypotenusev02.grader.HypoGrader#shouldCalculateCorrectHypotenuse</graja:methodName>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="category_1">
+            <title>Maintainability</title>
+            <test-type>graja-category</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+            </test-configuration>
+        </test>
+        <test id="junit_1">
+            <title>JUnit dynamic analysis</title>
+            <test-type>graja-junit</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:graderClassFqn>org.myinstitution.myassignments.hypotenusev02.grader.Grader</graja:graderClassFqn>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="method_2">
+            <title>Attributes in class Hypo should be private</title>
+            <test-type>graja-junit-method</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:methodName>org.myinstitution.myassignments.hypotenusev02.grader.HypoGrader#attributesShouldBePrivate</graja:methodName>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="method_3">
+            <title>Attributes in class SquareImpl should be private</title>
+            <test-type>graja-junit-method</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:methodName>org.myinstitution.myassignments.hypotenusev02.grader.SquareGrader#attributesShouldBePrivate</graja:methodName>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="method_4">
+            <title>The method hypo should delegate to square parameter</title>
+            <test-type>graja-junit-method</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:methodName>org.myinstitution.myassignments.hypotenusev02.grader.HypoGrader#hypoShouldDelegateToSquareParameter</graja:methodName>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="pmd_0">
+            <title>PMD static analysis</title>
+            <test-type>graja-pmd</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRuleset>ruleset_pr1.xml,ruleset_other.xml</graja:pmdRuleset>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="rule_0">
+            <title>ShortVariable</title>
+            <test-type>graja-pmd-rule</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRule>ShortVariable</graja:pmdRule>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="rule_1">
+            <title>VariableNamingConventions</title>
+            <test-type>graja-pmd-rule</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRule>VariableNamingConventions</graja:pmdRule>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="rule_2">
+            <title>MethodNamingConventions</title>
+            <test-type>graja-pmd-rule</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRule>MethodNamingConventions</graja:pmdRule>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="rule_3">
+            <title>ClassNamingConventions</title>
+            <test-type>graja-pmd-rule</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRule>ClassNamingConventions</graja:pmdRule>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="rule_4">
+            <title>MisleadingVariableName</title>
+            <test-type>graja-pmd-rule</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRule>MisleadingVariableName</graja:pmdRule>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="rule_5">
+            <title>Comments needed in front of methods and classes</title>
+            <test-type>graja-pmd-rule</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRule>CommentRequired</graja:pmdRule>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="human_0">
+            <title>Manually assigned scores</title>
+            <test-type>graja-human</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+            </test-configuration>
+        </test>
+        <test id="human-aspect_0">
+            <title>Readability</title>
+            <test-type>graja-human-aspect</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:humanAspectDescription>A grading assistant will manually assign scores for readability of your code.</graja:humanAspectDescription>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="human-aspect_1">
+            <title>Visual layout</title>
+            <test-type>graja-human-aspect</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:humanAspectDescription>A grading assistant will manually assign scores for the visual layout of your code. Example aspects: Did you use whitespace to delimit functional units? Did you use consistent visual metaphors to convey structure?</graja:humanAspectDescription>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="category_2">
+            <title>Security</title>
+            <test-type>graja-category</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+            </test-configuration>
+        </test>
+        <test id="junit_2">
+            <title>JUnit dynamic analysis</title>
+            <test-type>graja-junit</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:graderClassFqn>org.myinstitution.myassignments.hypotenusev02.grader.Grader</graja:graderClassFqn>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="method_5">
+            <title>Attributes in class Hypo should be private</title>
+            <test-type>graja-junit-method</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:methodName>org.myinstitution.myassignments.hypotenusev02.grader.HypoGrader#attributesShouldBePrivate</graja:methodName>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="method_6">
+            <title>Attributes in class SquareImpl should be private</title>
+            <test-type>graja-junit-method</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:methodName>org.myinstitution.myassignments.hypotenusev02.grader.SquareGrader#attributesShouldBePrivate</graja:methodName>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="pmd_1">
+            <title>PMD static analysis</title>
+            <test-type>graja-pmd</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRuleset>ruleset_security.xml,ruleset_other.xml</graja:pmdRuleset>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="rule_6">
+            <title>MethodReturnsInternalArray</title>
+            <test-type>graja-pmd-rule</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRule>MethodReturnsInternalArray</graja:pmdRule>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="rule_7">
+            <title>MisleadingVariableName</title>
+            <test-type>graja-pmd-rule</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRule>MisleadingVariableName</graja:pmdRule>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="human_1">
+            <title>Manually assigned scores</title>
+            <test-type>graja-human</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+            </test-configuration>
+        </test>
+        <test id="human-aspect_2">
+            <title>Readability</title>
+            <test-type>graja-human-aspect</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:humanAspectDescription>A grading assistant will manually assign scores for readability of your code.</graja:humanAspectDescription>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="human-aspect_3">
+            <title>Visual layout</title>
+            <test-type>graja-human-aspect</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:humanAspectDescription>A grading assistant will manually assign scores for the visual layout of your code. Example aspects: Did you use whitespace to delimit functional units? Did you use consistent visual metaphors to convey structure?</graja:humanAspectDescription>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="category_3">
+            <title>Reliability</title>
+            <test-type>graja-category</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+            </test-configuration>
+        </test>
+        <test id="junit_3">
+            <title>JUnit dynamic analysis</title>
+            <test-type>graja-junit</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:graderClassFqn>org.myinstitution.myassignments.hypotenusev02.grader.Grader</graja:graderClassFqn>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="method_7">
+            <title>Hypo should reject illegal cathetes</title>
+            <test-type>graja-junit-method</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:methodName>org.myinstitution.myassignments.hypotenusev02.grader.HypoGrader#hypoShouldRejectIllegalCathetes</graja:methodName>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="method_8">
+            <title>Hypo should reject illegal Square parameter</title>
+            <test-type>graja-junit-method</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:methodName>org.myinstitution.myassignments.hypotenusev02.grader.HypoGrader#hypoShouldRejectIllegalSquareParameter</graja:methodName>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="method_9">
+            <title>Square should check for double overflow</title>
+            <test-type>graja-junit-method</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:methodName>org.myinstitution.myassignments.hypotenusev02.grader.SquareGrader#squareShouldCheckOverflow</graja:methodName>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="human_2">
+            <title>Manually assigned scores</title>
+            <test-type>graja-human</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+            </test-configuration>
+        </test>
+        <test id="human-aspect_4">
+            <title>Comments</title>
+            <test-type>graja-human-aspect</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:humanAspectDescription>A grading assistant will manually assign scores for reasonable javadocs regarding valid parameter ranges.</graja:humanAspectDescription>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="category_4">
+            <title>Efficiency</title>
+            <test-type>graja-category</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+            </test-configuration>
+        </test>
+        <test id="pmd_2">
+            <title>PMD static analysis</title>
+            <test-type>graja-pmd</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRuleset>ruleset_efficiency.xml</graja:pmdRuleset>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="rule_8">
+            <title>FinalizeOverloaded</title>
+            <test-type>graja-pmd-rule</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:pmdRule>FinalizeOverloaded</graja:pmdRule>
+                </graja:grajaConfiguration>
+            </test-configuration>
+        </test>
+        <test id="category_5">
+            <title>UML</title>
+            <test-type>graja-category</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+            </test-configuration>
+        </test>
+        <test id="human_3">
+            <title>Manually assigned scores</title>
+            <test-type>graja-human</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+            </test-configuration>
+        </test>
+        <test id="human-aspect_5">
+            <title>UML class diagram</title>
+            <test-type>graja-human-aspect</test-type>
+            <test-configuration>
+                <externalresourcerefs/>
+                <graja:grajaConfiguration xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+                    <graja:humanAspectDescription>A grading assistant will manually assign scores for your UML class diagram.</graja:humanAspectDescription>
+                </graja:grajaConfiguration>
+                <test-meta-data>
+                    <unittest:unittest xmlns:unittest="urn:proforma:tests:unittest:v1" xmlns="urn:proforma:tests:unittest:v1" framework="" version="1">
+                        <main-class>11</main-class>
+                    </unittest:unittest>
+                </test-meta-data>
+            </test-configuration>
+        </test>
+    </tests>
+    <grading-hints>
+        <test-group:test-group xmlns:test-group="urn:grappa:tests:hierarchical:v0.0.1" xmlns="urn:grappa:tests:hierarchical:v0.0.1" score-max="391.0" testref-id="graja-main-test">
+            <test-group-members>
+                <test-group score-max="60.0" testref-id="category_0">
+                    <test-group-members>
+                        <test-group score-max="60.0" testref-id="junit_0">
+                            <test-group-members>
+<test-element score-max="35.0" testref-id="method_0"/>
+<test-element score-max="25.0" testref-id="method_1"/>
+                            </test-group-members>
+                        </test-group>
+                    </test-group-members>
+                </test-group>
+                <test-group score-max="136.0" testref-id="category_1">
+                    <test-group-members>
+                        <test-group score-max="70.0" testref-id="junit_1">
+                            <test-group-members>
+<test-element score-max="15.0" testref-id="method_2"/>
+<test-element score-max="15.0" testref-id="method_3"/>
+<test-element score-max="40.0" testref-id="method_4"/>
+                            </test-group-members>
+                        </test-group>
+                        <test-group score-max="41.0" testref-id="pmd_0">
+                            <test-group-members>
+<test-element score-max="0.0" testref-id="rule_0"/>
+<test-element score-max="6.0" testref-id="rule_1"/>
+<test-element score-max="4.0" testref-id="rule_2"/>
+<test-element score-max="9.0" testref-id="rule_3"/>
+<test-element score-max="11.0" testref-id="rule_4"/>
+<test-element score-max="11.0" testref-id="rule_5"/>
+                            </test-group-members>
+                        </test-group>
+                        <test-group score-max="25.0" testref-id="human_0">
+                            <test-group-members>
+<test-element score-max="15.0" testref-id="human-aspect_0"/>
+<test-element score-max="10.0" testref-id="human-aspect_1"/>
+                            </test-group-members>
+                        </test-group>
+                    </test-group-members>
+                </test-group>
+                <test-group score-max="65.0" testref-id="category_2">
+                    <test-group-members>
+                        <test-group score-max="20.0" testref-id="junit_2">
+                            <test-group-members>
+<test-element score-max="10.0" testref-id="method_5"/>
+<test-element score-max="10.0" testref-id="method_6"/>
+                            </test-group-members>
+                        </test-group>
+                        <test-group score-max="35.0" testref-id="pmd_1">
+                            <test-group-members>
+<test-element score-max="25.0" testref-id="rule_6"/>
+<test-element score-max="10.0" testref-id="rule_7"/>
+                            </test-group-members>
+                        </test-group>
+                        <test-group score-max="10.0" testref-id="human_1">
+                            <test-group-members>
+<test-element score-max="0.0" testref-id="human-aspect_2"/>
+<test-element score-max="10.0" testref-id="human-aspect_3"/>
+                            </test-group-members>
+                        </test-group>
+                    </test-group-members>
+                </test-group>
+                <test-group score-max="40.0" testref-id="category_5">
+                    <test-group-members>
+                        <test-group score-max="40.0" testref-id="human_3">
+                            <test-group-members>
+<test-element score-max="40.0" testref-id="human-aspect_5"/>
+                            </test-group-members>
+                        </test-group>
+                    </test-group-members>
+                </test-group>
+                <test-element score-max="5555.0" testref-id="category_1"/>
+            </test-group-members>
+        </test-group:test-group>
+    </grading-hints>
+    <meta-data>
+        <title>Hypotenuse</title>
+        <graja:assignmentMetaData xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+            <graja:assignmentId>org.myinstitution.myassignments.hypotenusev02</graja:assignmentId>
+            <graja:assignmentVersion>2.0</graja:assignmentVersion>
+            <graja:targetGroup>Computer science, entry level</graja:targetGroup>
+        </graja:assignmentMetaData>
+    </meta-data>
+</task>

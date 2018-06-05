@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="http://graja.inform.hs-hannover.de/grade/v0.10.1" xmlns:tns="http://graja.inform.hs-hannover.de/grade/v0.10.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:grappa:tests:hierarchical:v0.0.1" xmlns:graja="http://graja.inform.hs-hannover.de/grade/v0.10.1">
+
+  <xs:import namespace="urn:grappa:tests:hierarchical:v0.0.1" schemaLocation="grappa-aspect-hierarchy_v0_0_1.xsd"/>
+
+  <xs:element name="assignmentMetaData" type="tns:assignmentMetaData"/>
+
+  <xs:element name="backendMultiRequest" type="tns:backendMultiRequest"/>
+
+  <xs:element name="backendSingleRequest" type="tns:backendSingleRequest"/>
+
+  <xs:element name="classpathRefs" type="tns:classpathRefs"/>
+
+  <xs:element name="frontendMultiRequest" type="tns:frontendMultiRequest"/>
+
+  <xs:element name="frontendProformaAssignment" type="tns:frontendProformaAssignment"/>
+
+  <xs:element name="frontendSingleRequest" type="tns:frontendSingleRequest"/>
+
+  <xs:element name="grajaConfiguration" type="tns:grajaConfiguration"/>
+
+  <xs:element name="grajaMetaData" type="tns:grajaMetaData"/>
+
+  <xs:element name="multiResult" type="tns:multiResult"/>
+
+  <xs:element name="plainOldFrontendAssignment" type="tns:frontendPlainOldAssignment"/>
+
+  <xs:element name="policyRef" type="tns:policyRef"/>
+
+  <xs:element name="result" type="tns:result"/>
+
+  <xs:element name="singleResult" type="tns:singleResult"/>
+
+  <xs:complexType name="backendSingleRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:backendRequest">
+        <xs:sequence>
+          <xs:element name="assignment" type="tns:backendAssignment"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="backendRequest" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element name="submissionZip" type="tns:resourceLocalFile"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="request" abstract="true">
+    <xs:sequence>
+      <xs:element name="clientData" type="tns:clientData" minOccurs="0"/>
+      <xs:element name="debugSwitches" type="tns:debugSwitches" minOccurs="0"/>
+      <xs:element name="rdKinds" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="rdKind" type="tns:rdKind" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="backendAssignment">
+    <xs:sequence>
+      <xs:element name="assignmentSettings" type="tns:assignmentSettings"/>
+      <xs:element name="classPath" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="classPathElement" type="tns:resourceLocalFile" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="securityPolicy" type="tns:resourceLocalFile" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="assignmentSettings">
+    <xs:sequence>
+      <xs:element ref="tns:assignmentMetaData" minOccurs="0"/>
+      <xs:element ref="ns1:computing-resources" minOccurs="0"/>
+      <xs:element ref="tns:grajaMetaData" minOccurs="0"/>
+      <xs:element name="grajaTests" type="tns:grajaCategory" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="javaVersion" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="assignmentMetaData">
+    <xs:sequence>
+      <xs:element name="assignmentId" type="xs:string" minOccurs="0"/>
+      <xs:element name="assignmentVersion" type="xs:string" minOccurs="0"/>
+      <xs:element name="targetGroup" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="grajaMetaData">
+    <xs:sequence>
+      <xs:element name="grajaVersionCompatibility" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="grajaCategory">
+    <xs:complexContent>
+      <xs:extension base="tns:aspect">
+        <xs:sequence>
+          <xs:element name="jUnitModule" type="tns:junitModule" minOccurs="0"/>
+          <xs:element name="pmdModule" type="tns:pmdModule" minOccurs="0"/>
+          <xs:element name="humanModule" type="tns:humanModule" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="aspect" abstract="true">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string" minOccurs="0"/>
+      <xs:element name="scoreMax" type="xs:decimal" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="junitModule">
+    <xs:complexContent>
+      <xs:extension base="tns:aspect">
+        <xs:sequence>
+          <xs:element name="graderFqn" type="xs:string" minOccurs="0"/>
+          <xs:element name="testMethods" type="tns:junitModuleMethod" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="junitModuleMethod">
+    <xs:complexContent>
+      <xs:extension base="tns:aspect">
+        <xs:sequence>
+          <xs:element name="methodName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="humanModule">
+    <xs:complexContent>
+      <xs:extension base="tns:aspect">
+        <xs:sequence>
+          <xs:element name="aspects" type="tns:humanModuleAspect" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="humanModuleAspect">
+    <xs:complexContent>
+      <xs:extension base="tns:aspect">
+        <xs:sequence>
+          <xs:element name="description" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="pmdModule">
+    <xs:complexContent>
+      <xs:extension base="tns:aspect">
+        <xs:sequence>
+          <xs:element name="rulesetRef" type="xs:string" minOccurs="0"/>
+          <xs:element name="rules" type="tns:pmdModuleRule" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="pmdModuleRule">
+    <xs:complexContent>
+      <xs:extension base="tns:aspect">
+        <xs:sequence>
+          <xs:element name="rule" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="resourceLocalFile">
+    <xs:complexContent>
+      <xs:extension base="tns:resource">
+        <xs:sequence>
+          <xs:element name="path" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="resource">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="identifiableResource">
+    <xs:complexContent>
+      <xs:extension base="tns:resource">
+        <xs:sequence>
+          <xs:element name="id" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="clientData">
+    <xs:sequence>
+      <xs:element name="data" type="tns:mapItem" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="mapItem">
+    <xs:sequence>
+      <xs:element name="key" type="xs:string"/>
+      <xs:element name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="debugSwitches">
+    <xs:sequence>
+      <xs:element name="keepWorkspace" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="keepTmpPolicy" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="javaSecurityDebug" type="xs:string" minOccurs="0"/>
+      <xs:element name="agentlibJdwp" type="xs:string" minOccurs="0"/>
+      <xs:element name="overrideMaxRuntimeSecondsWallclockTime" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="rdKind">
+    <xs:sequence>
+      <xs:element name="level" type="xs:string" minOccurs="0"/>
+      <xs:element name="audience" type="xs:string" minOccurs="0"/>
+      <xs:element name="representation" type="tns:representation" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="frontendRequest" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="tns:request">
+        <xs:sequence>
+          <xs:element name="submissionZip" type="tns:resource"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="frontendSingleRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:frontendRequest">
+        <xs:sequence>
+          <xs:element name="assignment" type="tns:frontendAssignment"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="frontendAssignment" abstract="true">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="frontendPlainOldAssignment">
+    <xs:complexContent>
+      <xs:extension base="tns:frontendAssignment">
+        <xs:sequence>
+          <xs:element name="assignmentSettings" type="tns:assignmentSettings"/>
+          <xs:element name="classPath" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="classPathElement" type="tns:resource" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="securityPolicy" type="tns:resource" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="frontendProformaAssignment">
+    <xs:complexContent>
+      <xs:extension base="tns:frontendAssignment">
+        <xs:sequence>
+          <xs:element name="taskZip" type="tns:resource" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="frontendMultiRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:frontendRequest">
+        <xs:sequence>
+          <xs:element name="assignments" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="assignment" type="tns:frontendKeyedAssignment" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="expectedRootFolderInSubmissionZip" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="frontendKeyedAssignment">
+    <xs:sequence>
+      <xs:element name="key" type="xs:string"/>
+      <xs:element name="assignment" type="tns:frontendAssignment"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="backendMultiRequest">
+    <xs:complexContent>
+      <xs:extension base="tns:backendRequest">
+        <xs:sequence>
+          <xs:element name="assignments" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="assignment" type="tns:backendKeyedAssignment" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="expectedRootFolderInSubmissionZip" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="backendKeyedAssignment">
+    <xs:sequence>
+      <xs:element name="key" type="xs:string"/>
+      <xs:element name="assignment" type="tns:backendAssignment"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="grajaConfiguration">
+    <xs:sequence>
+      <xs:element name="graderClassFqn" type="xs:string" minOccurs="0"/>
+      <xs:element name="pmdRuleset" type="xs:string" minOccurs="0"/>
+      <xs:element name="pmdRule" type="xs:string" minOccurs="0"/>
+      <xs:element name="methodName" type="xs:string" minOccurs="0"/>
+      <xs:element name="humanAspectDescription" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="classpathRefs">
+    <xs:sequence>
+      <xs:element name="refs" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="refs" type="tns:proformaRef" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="proformaRef">
+    <xs:sequence/>
+    <xs:attribute name="externalOrFile" type="xs:string" use="required"/>
+    <xs:attribute name="refid" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="policyRef">
+    <xs:sequence>
+      <xs:element name="ref" type="tns:proformaRef" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="result">
+    <xs:sequence>
+      <xs:element name="grajaVersion" type="xs:string" minOccurs="0"/>
+      <xs:element name="messagePreformattedPlain" type="xs:string" minOccurs="0"/>
+      <xs:element name="clientData" type="tns:clientData" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="error" type="xs:boolean">
+        <xs:annotation><xs:documentation>info</xs:documentation></xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="singleResult">
+    <xs:complexContent>
+      <xs:extension base="tns:result">
+        <xs:sequence>
+          <xs:element name="assignmentResult" type="tns:assignmentResult" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="assignmentResult">
+    <xs:sequence>
+      <xs:element name="scoreAchieved" type="xs:double" minOccurs="0"/>
+      <xs:element name="graderName" type="xs:string" minOccurs="0"/>
+      <xs:element name="graderVersion" type="xs:string" minOccurs="0"/>
+      <xs:element name="documents" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="document" type="tns:document" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="document">
+    <xs:sequence>
+      <xs:element name="level" type="xs:string"/>
+      <xs:element name="audience" type="xs:string"/>
+      <xs:choice>
+        <xs:element name="docReprPlainText" type="tns:docReprPlainText"/>
+        <xs:element name="docReprHtml" type="tns:docReprHtml"/>
+      </xs:choice>
+      <xs:element name="content" type="xs:base64Binary"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="docReprPlainText">
+    <xs:complexContent>
+      <xs:extension base="tns:docRepresentation">
+        <xs:sequence>
+          <xs:element name="charset" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="docRepresentation" abstract="true">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="docReprHtml">
+    <xs:complexContent>
+      <xs:extension base="tns:docRepresentation">
+        <xs:sequence/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="keyedAssignmentResult">
+    <xs:complexContent>
+      <xs:extension base="tns:assignmentResult">
+        <xs:sequence>
+          <xs:element name="key" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="multiResult">
+    <xs:complexContent>
+      <xs:extension base="tns:result">
+        <xs:sequence>
+          <xs:element name="assignmentResults" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="assignmentResult" type="tns:keyedAssignmentResult" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="documents" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="document" type="tns:document" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="representation">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="html"/>
+      <xs:enumeration value="plain"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

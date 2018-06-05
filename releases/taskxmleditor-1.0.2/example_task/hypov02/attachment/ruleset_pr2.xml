@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<ruleset name="Objektorientierte Programmierung"
+         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
+    <description>
+        Regeln für Prozedurale Programmierung
+    </description>
+    <!-- Regeln entnommen aus der Bachelorarbeit von Simon Beckstein, Anhang C -> Objektorientierte Programmierung (S.80 f.)-->
+    <rule ref="rulesets/java/basic.xml/JumbledIncrementer"/>
+    <rule ref="rulesets/java/basic.xml/CollapsibleIfStatements"/>
+    <rule ref="rulesets/java/braces.xml/IfStmtsMustUseBraces"/>
+    <rule ref="rulesets/java/braces.xml/WhileLoopsMustUseBraces"/>
+    <rule ref="rulesets/java/braces.xml/IfElseStmtsMustUseBraces"/>
+    <rule ref="rulesets/java/braces.xml/ForLoopsMustUseBraces"/>
+    <rule ref="rulesets/java/codesize.xml/NPathComplexity"/>
+    <rule ref="rulesets/java/codesize.xml/ExcessiveMethodLength"/>
+    <rule ref="rulesets/java/codesize.xml/CyclomaticComplexity"/>
+    <rule ref="rulesets/java/codesize.xml/NcssMethodCount"/>
+    <rule ref="rulesets/java/comments.xml/CommentRequired"/>
+    <rule ref="rulesets/java/design.xml/SimplifyBooleanReturns"/>
+    <rule ref="rulesets/java/design.xml/SimplifyBooleanExpressions"/>
+    <rule ref="rulesets/java/design.xml/AvoidDeeplyNestedIfStmts"/>
+    <rule ref="rulesets/java/design.xml/CloseResource"/>
+    <rule ref="rulesets/java/design.xml/ConfusingTernary"/>
+    <rule ref="rulesets/java/design.xml/SimplifyConditional"/>
+    <rule ref="rulesets/java/design.xml/LogicInversion"/>
+    <rule ref="rulesets/java/design.xml/FieldDeclarationsShouldBeAtStartOfClass"/>
+    <rule ref="rulesets/java/naming.xml/ShortVariable"/>
+    <rule ref="rulesets/java/naming.xml/LongVariable"/>
+    <rule ref="rulesets/java/naming.xml/ShortMethodName"/>
+    <rule ref="rulesets/java/naming.xml/VariableNamingConventions"/>
+    <rule ref="rulesets/java/naming.xml/MethodNamingConventions"/>
+    <rule ref="rulesets/java/naming.xml/ClassNamingConventions"/>
+    <rule ref="rulesets/java/naming.xml/NoPackage"/>
+    <rule ref="rulesets/java/naming.xml/PackageCase"/>
+    <rule ref="rulesets/java/strings.xml/UseEqualsToCompareStrings"/>
+	
+    <rule ref="rulesets/java/basic.xml/OverrideBothEqualsAndHashcode"/>
+    <rule ref="rulesets/java/basic.xml/DontCallThreadRun"/>
+    <rule ref="rulesets/java/design.xml/CompareObjectsWithEquals"/>
+    <rule ref="rulesets/java/design.xml/UseCollectionIsEmpty"/>
+    <rule ref="rulesets/java/naming.xml/SuspiciousHashcodeMethodName"/>
+    <rule ref="rulesets/java/naming.xml/SuspiciousConstantFieldName"/>
+    <rule ref="rulesets/java/naming.xml/SuspiciousEqualsMethodName"/>
+    <rule ref="rulesets/java/naming.xml/BooleanGetMethodName"/>
+    <rule ref="rulesets/java/naming.xml/ShortClassName"/>
+</ruleset>
