@@ -272,17 +272,19 @@ public final class Configuration extends Observable {
 
 
   /**
-   * combines all available schemas into a single schema so we don't have to deal with
-   * SchemaFactory.newSchema(Source[]) and the correct (to us unknown) order
-   * of multiple schema files that depend on one another
-   * the idea comes from this guy: http://stackoverflow.com/a/23289220/4765331
+   * Combines all available schemas into a single schema that consists solely of
+   * several include and import instructions, thus creating a new xsd file.
+   * That way we don't have to deal with SchemaFactory.newSchema(Source[]),
+   * whose array parameter depends on the correct order of multiple schema files
+   * that may or may not depend on one another.
+   * The idea came from this post: http://stackoverflow.com/a/23289220/4765331
    *
    * @param xsdUrls all xsd files except the proforma one
    * @return
    * @throws Exception
    */
   private Schema createCombinedSchema() throws Exception {
-    log.debug("Combining multiple schema files into one big chunk of xsd");
+    log.debug("Combining multiple schema files by creating a new that contains all the include instructions");
     //Arrays.stream(xsdUrls).forEach(url -> log.debug("Combining schema file: " + url.getPath()));
 
     SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -293,8 +295,8 @@ public final class Configuration extends Observable {
 
     sb.append("<xs:include schemaLocation=\"" + taskXsdFile.getAbsolutePath() + "\"/>\n");
 
-    // we import because we known there aren't going to be any other schema files that use the same
-    // targetNamespace as task.xml. I think.
+    // we have to use the 'import' instruction because we can't know for sure there aren't going to be other schema files
+    // that use the same targetNamespace as task.xml does
     for (Map.Entry<String, File> e : getAllExtensionXsdFilesThatTheTaskActuallyUses().entrySet()) {
       if (null != e.getValue()) {
         sb.append(String.format("<xs:import namespace=\"%s\" schemaLocation=\"%s\"/>\n",
